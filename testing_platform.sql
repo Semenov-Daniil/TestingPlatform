@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Мар 20 2025 г., 18:07
+-- Время создания: Мар 24 2025 г., 16:39
 -- Версия сервера: 10.8.4-MariaDB-log
 -- Версия PHP: 8.0.22
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `new_diplom2`
+-- База данных: `testing_platform`
 --
 
 -- --------------------------------------------------------
@@ -40,16 +40,10 @@ CREATE TABLE `answer` (
 --
 
 INSERT INTO `answer` (`id`, `title`, `image`, `is_true`, `question_id`) VALUES
-(84, 'test1', NULL, 0, 60),
-(85, 'test2', NULL, 0, 60),
-(86, 'test3', NULL, 1, 60),
-(87, 'test1', NULL, 1, 61),
-(88, 'test2', NULL, 1, 61),
-(89, 'test3', NULL, 0, 61),
-(90, 'Test', NULL, 1, 62),
-(91, 'test1', NULL, 1, 63),
-(92, 'test2', NULL, 0, 63),
-(93, 'test3', NULL, 0, 63);
+(94, 'test', NULL, 1, 64),
+(95, 'test', NULL, 1, 65),
+(96, 'test', '/web/answer-img/703_1742822080_OeEbD5J6wi.jpg', 1, 66),
+(97, 'test', NULL, 0, 66);
 
 -- --------------------------------------------------------
 
@@ -132,8 +126,7 @@ CREATE TABLE `group` (
 --
 
 INSERT INTO `group` (`id`, `title`) VALUES
-(1, 'iv123'),
-(2, '234');
+(3, 'ИВ1-21');
 
 -- --------------------------------------------------------
 
@@ -159,7 +152,9 @@ CREATE TABLE `group_test` (
 --
 
 INSERT INTO `group_test` (`id`, `date`, `avg_points`, `val_5`, `val_4`, `val_3`, `fails`, `group_id`, `test_id`, `end_time`) VALUES
-(63, NULL, NULL, NULL, NULL, NULL, NULL, 1, 42, '2025-03-20 17:51:07');
+(64, NULL, NULL, NULL, NULL, NULL, NULL, 3, 43, '2025-03-24 12:49:37'),
+(65, NULL, NULL, NULL, NULL, NULL, NULL, 3, 44, '2025-03-24 13:18:16'),
+(66, NULL, NULL, NULL, NULL, NULL, NULL, 3, 45, '2025-03-24 13:34:58');
 
 -- --------------------------------------------------------
 
@@ -204,10 +199,9 @@ CREATE TABLE `question` (
 --
 
 INSERT INTO `question` (`id`, `text`, `points_per_question`, `image`, `level_id`, `test_id`, `type_id`) VALUES
-(60, 'Test 1', 1, NULL, 1, 42, 1),
-(61, 'Test 2', 2, NULL, 2, 42, 2),
-(62, 'Test 3', 3, NULL, 3, 42, 3),
-(63, 'Test 4', 2, NULL, 2, 42, 1);
+(64, 'Test', 1, '/web/question-img/703_1742819127_1vKGv88uF_.jpg', 1, 43, 1),
+(65, 'test', 1, NULL, 1, 44, 1),
+(66, 'Текст вопроса', 1, '/web/question-img/703_1742822080_1Bj309glm7.png', 1, 45, 1);
 
 -- --------------------------------------------------------
 
@@ -311,8 +305,7 @@ CREATE TABLE `student_test` (
 --
 
 INSERT INTO `student_test` (`id`, `points`, `mark`, `test_id`, `user_id`, `group_test_id`, `cheked`, `date`, `attempt`, `ip`) VALUES
-(118, 0, 2, 42, 77, 63, 1, '2025-03-20', 1, NULL),
-(119, 0, 2, 42, 77, 63, 1, '2025-03-20', 2, NULL);
+(120, 0, 2, 43, 715, 64, 1, '2025-03-24', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -330,8 +323,7 @@ CREATE TABLE `subject` (
 --
 
 INSERT INTO `subject` (`id`, `title`) VALUES
-(1, 'пришем код'),
-(2, 'не пришем код');
+(3, 'ПМ09');
 
 -- --------------------------------------------------------
 
@@ -350,8 +342,7 @@ CREATE TABLE `teacher_subject` (
 --
 
 INSERT INTO `teacher_subject` (`id`, `user_id`, `subject_id`) VALUES
-(1, 68, 1),
-(2, 68, 2);
+(3, 703, 3);
 
 -- --------------------------------------------------------
 
@@ -374,7 +365,9 @@ CREATE TABLE `test` (
 --
 
 INSERT INTO `test` (`id`, `title`, `question_count`, `point_count`, `subject_id`, `is_active`, `duration`) VALUES
-(42, 'Test', 4, 8, 1, 1, 20);
+(43, 'Test', 1, 1, 3, 0, 20),
+(44, 'test', 1, 1, 3, 0, 20),
+(45, 'Test №3', 1, 1, 3, 0, 20);
 
 -- --------------------------------------------------------
 
@@ -421,8 +414,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `name`, `surname`, `patronimyc`, `login`, `password`, `email`, `phone`, `role_id`, `auth_key`) VALUES
 (2, 'admin', 'admin', 'admin', 'admin', '$2y$13$OPlJC8YfaEg4KmDEQzIvH.cN0aRiJZh0MgmVQkB94bpDRyjBZDWDy', 'admin', 'admin', 2, 'qCRkB2qqOQz6IGyPYRnwkKy7m0jmpwOJ'),
-(68, 'teacher', 'teacher', 'teacher', 'teacher', '$2y$13$Tq7pIwFSvU.JgAFj1I1.x.ETffLgNx44o/TH8./f50zVR1TciKHbq', 'teacher', 'teacher', 3, 'LwJUjcM9VhLjsEQvDuyMvot8nDN0J2XF'),
-(77, 'student', 'student', 'student', 'student', '$2y$13$xceS3/d8uJpFbwBIGZwk1uSv0mwd3/neiZvy53fMvloNBiS004dHW', 'student', 'student', 4, '6AGxewilkapWVuCJ8sBrkknUA2mgp5QK');
+(703, 'Teacher', 'Main', '1', 'se5MF-', '$2y$13$av1cwJ8Lotd0N6W3zmWixedBBiyLJde.dUsQMMjgNTD67Z4HMxZK.', NULL, NULL, 3, 'jB1rTJj-efLtpdfpqfuDi3z-g8Ur352J'),
+(715, 'Main', 'Student', '1', '8IQLPn', '$2y$13$N5F3LKrzV/GpTYw6cagrRuo3o9P161ASO5aom9Rtm4BG55XxC8T8W', NULL, NULL, 4, 'c2VI7Z1Vim-3i2fmxuDniEgFMXpb3ZWh');
 
 -- --------------------------------------------------------
 
@@ -441,7 +434,27 @@ CREATE TABLE `user_group` (
 --
 
 INSERT INTO `user_group` (`id`, `user_id`, `group_id`) VALUES
-(558, 77, 1);
+(559, 703, 3),
+(571, 715, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `user_password`
+--
+
+CREATE TABLE `user_password` (
+  `user_id` int(11) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Дамп данных таблицы `user_password`
+--
+
+INSERT INTO `user_password` (`user_id`, `password`) VALUES
+(703, 'nHvBT9'),
+(715, 'rnFvcW');
 
 --
 -- Индексы сохранённых таблиц
@@ -599,6 +612,12 @@ ALTER TABLE `user_group`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Индексы таблицы `user_password`
+--
+ALTER TABLE `user_password`
+  ADD PRIMARY KEY (`user_id`);
+
+--
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
@@ -606,7 +625,7 @@ ALTER TABLE `user_group`
 -- AUTO_INCREMENT для таблицы `answer`
 --
 ALTER TABLE `answer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
 -- AUTO_INCREMENT для таблицы `deny`
@@ -618,19 +637,19 @@ ALTER TABLE `deny`
 -- AUTO_INCREMENT для таблицы `group`
 --
 ALTER TABLE `group`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `group_test`
 --
 ALTER TABLE `group_test`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT для таблицы `question`
 --
 ALTER TABLE `question`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT для таблицы `question_level`
@@ -660,25 +679,25 @@ ALTER TABLE `student_answer`
 -- AUTO_INCREMENT для таблицы `student_test`
 --
 ALTER TABLE `student_test`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- AUTO_INCREMENT для таблицы `subject`
 --
 ALTER TABLE `subject`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `teacher_subject`
 --
 ALTER TABLE `teacher_subject`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `test`
 --
 ALTER TABLE `test`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT для таблицы `test_status`
@@ -690,13 +709,19 @@ ALTER TABLE `test_status`
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=702;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=716;
 
 --
 -- AUTO_INCREMENT для таблицы `user_group`
 --
 ALTER TABLE `user_group`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=559;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=572;
+
+--
+-- AUTO_INCREMENT для таблицы `user_password`
+--
+ALTER TABLE `user_password`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=716;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -783,6 +808,12 @@ ALTER TABLE `user`
 ALTER TABLE `user_group`
   ADD CONSTRAINT `user_group_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `user_group_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `user_password`
+--
+ALTER TABLE `user_password`
+  ADD CONSTRAINT `user_password_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
