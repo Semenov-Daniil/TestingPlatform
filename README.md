@@ -3,7 +3,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-      <h3 align="center">Плаформа тестирования на Yii2</h3>
+      <h1 align="center">Плаформа тестирования на Yii2</h3>
     <br />
 </div>
 
