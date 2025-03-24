@@ -64,6 +64,7 @@ class TestController extends Controller
         if (!$isValidTime) {
             if ($test_id) StudentTest::createStudentTest($test_id, $group_test_id, $attempt, Yii::$app->user->identity->id, $isValidTime);
             // Yii::$app->session->setFlash('error', 'время закончилось');
+            
             return $this->redirect('/')->send();
         }
 

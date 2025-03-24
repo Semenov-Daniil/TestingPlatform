@@ -36,6 +36,16 @@ $this->params['breadcrumbs'][] = $this->title;
             ]) : '' ?>
     </p>
 
+    <ul class="list-group">
+        <li class="list-group-item"><b>Продолжительность:</b> <?= $model->duration?> мин.</li>
+        <li class="list-group-item"><b>Предмет:</b> <?= Html::encode($model->subject->title) ?></li>
+        <li class="list-group-item"><b>Кол-во вопросов:</b> <?= Html::encode($model->question_count) ?></li>
+        <?php if ($model->is_active): ?>
+        <li class="list-group-item"><b>Открыт для группы:</b> <?= $model?->lastGroup->group[0]->title ?></li>
+        <li class="list-group-item"><b>Открыт до:</b> <?= Yii::$app->formatter->asDatetime($model?->lastGroup->end_time, 'HH:mm dd.MM.yyyy') ?></li>
+        <?php endif; ?>
+    </ul>
+
     <?php
     $list = [];
     foreach ($model->questions as $question) {
