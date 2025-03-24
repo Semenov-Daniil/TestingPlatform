@@ -8,9 +8,17 @@ use yii\bootstrap5\ActiveForm;
 /** @var yii\web\View $this */
 /** @var app\models\User $model */
 /** @var yii\widgets\ActiveForm $form */
+
+$this->title = 'Изменить группу';
+$this->params['breadcrumbs'][] = ['label' => 'Преподаватели', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="user-form" id="editGroup">
+
+    <h1>
+        <?= Html::encode($this->title) ?>
+    </h1>
 
     <?php $form = ActiveForm::begin(); ?>
     <?= 'текущая группа ' . Group::getGroupTitle($groupId) ?>

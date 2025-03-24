@@ -13,7 +13,7 @@ use yii\helpers\Html;
 
 if (Yii::$app->user->isGuest) {
     $navLinks = [
-        ['label' => 'войти', 'url' => ['/site/login']]
+        ['label' => 'Войти', 'url' => ['/site/login']]
     ];
 } elseif (Yii::$app->user->identity->role_id == Role::getRoleId('manager')) {
     $navLinks = [
@@ -143,14 +143,14 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     <div class="info">
                         <span class="d-block" style="color: #C7CAD2FF;">
                             <?php $roleArr = [
-                                'admin' => 'администратор',
-                                'manager' => 'менеджер',
-                                'teacher' => 'преподаватель',
-                                'student' => 'студент',
+                                'admin' => 'Администратор',
+                                'manager' => 'Менеджер',
+                                'teacher' => 'Преподаватель',
+                                'student' => 'Студент',
 
                             ] ?>
-                            роль:
-                            <?= !Yii::$app->user->isGuest ? $roleArr[Role::getRoleTitle(Yii::$app->user->identity->role_id)] : 'необходимо войти'
+                            Роль:
+                            <?= !Yii::$app->user->isGuest ? $roleArr[Role::getRoleTitle(Yii::$app->user->identity->role_id)] : 'Необходимо войти'
                             ?>
                         </span>
                     </div>

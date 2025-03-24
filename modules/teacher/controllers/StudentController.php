@@ -7,6 +7,7 @@ use app\models\Role;
 use app\models\StudentTest;
 use app\models\User;
 use app\models\UserGroup;
+use app\models\UserPassword;
 use app\modules\teacher\models\StudentSearch;
 use Yii;
 use yii\db\Query;
@@ -222,6 +223,59 @@ class StudentController extends Controller
         ]);
     }
 
+    function createNewData($newData, $model)
+    {
+        $newData = [
+            'name' => $model->name,
+            'surname' => $model->surname,
+            'patronimyc' => $model->patronimyc,
+            'login' => $model->login,
+            'password' => $model->password,
+        ];
+        return $newData;
+    }
+
+    function updateData($newData, $oldData)
+    {
+        $oldData = json_decode($oldData, true);
+        // VarDumper::dump($oldData, 10, true);
+        foreach ($newData as $key => $newUser) {
+            // VarDumper::dump($newUser['login'], 10, true);
+            foreach ($oldData as $oldUser) {
+                if ($newUser['name'] == $oldUser['name'] && $newUser['surname'] == $oldUser['surname'] && $newUser['patronimyc'] == $oldUser['patronimyc']) {
+                    unset($newData[$key]);
+                }
+            }
+        }
+        // VarDumper::dump($newData, 10, true);
+
+        // VarDumper::dump(json_decode($oldData, true), 10, true);
+        // die;
+        return $newData;
+    }
+
+    function fileHandler($file, $newData)
+    {
+        if (!file_exists($file)) {
+            $fp = fopen($file, "w+");
+            fwrite($fp, json_encode($newData));
+            fclose($fp);
+            // VarDumper::dump(json_encode($newData), 10, true);
+            // die;
+        } else {
+            $oldData = file_get_contents($file);
+            // VarDumper::dump($oldData, 10, true);
+            // die;
+            $newData = $this->updateData($newData, $oldData);
+
+            // VarDumper::dump([...$newData, ...json_decode($oldData, true)], 10, true);
+            // die;
+            $fp = fopen($file, "w+");
+            fwrite($fp, json_encode([...$newData, ...json_decode($oldData, true)]));
+            fclose($fp);
+        }
+    }
+
     /**
      * Creates a new User model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -239,56 +293,7 @@ class StudentController extends Controller
             $user->save();
         };
 
-        function createNewData($newData, $model)
-        {
-            $newData = [
-                'name' => $model->name,
-                'surname' => $model->surname,
-                'patronimyc' => $model->patronimyc,
-                'login' => $model->login,
-                'password' => $model->password,
-            ];
-            return $newData;
-        }
-        function updateData($newData, $oldData)
-        {
-            $oldData = json_decode($oldData, true);
-            // VarDumper::dump($oldData, 10, true);
-            foreach ($newData as $key => $newUser) {
-                // VarDumper::dump($newUser['login'], 10, true);
-                foreach ($oldData as $oldUser) {
-                    if ($newUser['name'] == $oldUser['name'] && $newUser['surname'] == $oldUser['surname'] && $newUser['patronimyc'] == $oldUser['patronimyc']) {
-                        unset($newData[$key]);
-                    }
-                }
-            }
-            // VarDumper::dump($newData, 10, true);
-
-            // VarDumper::dump(json_decode($oldData, true), 10, true);
-            // die;
-            return $newData;
-        }
-        function fileHandler($file, $newData)
-        {
-            if (!file_exists($file)) {
-                $fp = fopen($file, "w+");
-                fwrite($fp, json_encode($newData));
-                fclose($fp);
-                // VarDumper::dump(json_encode($newData), 10, true);
-                // die;
-            } else {
-                $oldData = file_get_contents($file);
-                // VarDumper::dump($oldData, 10, true);
-                // die;
-                $newData = updateData($newData, $oldData);
-
-                // VarDumper::dump([...$newData, ...json_decode($oldData, true)], 10, true);
-                // die;
-                $fp = fopen($file, "w+");
-                fwrite($fp, json_encode([...$newData, ...json_decode($oldData, true)]));
-                fclose($fp);
-            }
-        }
+        
         // function createNewUserGroup($user_id, $group)
         // {
         //     $model = new UserGroup();
@@ -315,7 +320,7 @@ class StudentController extends Controller
                         $model->patronimyc = substr($value[2], 0, -1);
                         $model->login = Yii::$app->security->generateRandomString(6);
                         $model->password = Yii::$app->security->generateRandomString(6);
-                        array_push($newData, createNewData($newData, $model));
+                        array_push($newData, $this->createNewData($newData, $model));
                         $model->auth_key = Yii::$app->security->generateRandomString();
                         $model->role_id = Role::getRoleId('student');
                         // VarDumper::dump($model->attributes, 10, true);
@@ -327,7 +332,7 @@ class StudentController extends Controller
                     // VarDumper::dump(file_exists($file), 10, true);
                     // die;
 
-                    fileHandler($file, $newData);
+                    $this->fileHandler($file, $newData);
 
                     if (file_exists($file)) {
                         $this->downloadFile($group);
@@ -353,12 +358,16 @@ class StudentController extends Controller
                     $model->auth_key = Yii::$app->security->generateRandomString();
                     $model->role_id = Role::getRoleId('student');
                     $model->password = Yii::$app->security->generateRandomString(6);
-                    array_push($newData, createNewData($newData, $model));
-                    fileHandler($file, $newData);
+                    array_push($newData, $this->createNewData($newData, $model));
+                    $this->fileHandler($file, $newData);
                     $model->password = Yii::$app->security->generatePasswordHash($tempPass);
                     if ($model->save()) {
-                        $model->group_id && $addGroup($model, $group->id);
-                        return $this->redirect(['view', 'id' => $model->id, 'login' => $model->login, 'pass' => $tempPass]);
+                        $password = new UserPassword(['user_id' => $model->id, 'password' => $tempPass]);
+
+                        if ($password->save()) {
+                            $model->group_id && $addGroup($model, $group->id);
+                            return $this->redirect(['view', 'id' => $model->id]);
+                        }
                     }
                 }
             }
@@ -404,7 +413,30 @@ class StudentController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $groupTitle = UserGroup::findOne(['user_id' => $model->id])?->group->title;
+
+        if ($model->delete()) {
+            $file = '../web/groupListFile/' . $groupTitle . '.json';
+
+            if (file_exists($file)) {
+                $oldData = json_decode(file_get_contents($file));
+                
+                foreach ($oldData as $key => $oldUser) {
+                    if ($model->login == $oldUser->login) {
+                        unset($oldData[$key]);
+                    }
+                }
+
+                $fp = fopen($file, "w+");
+                fwrite($fp, json_encode([...$oldData]));
+                fclose($fp);
+            }
+
+
+        }
+
+
 
         return $this->redirect(['index']);
     }
@@ -422,6 +454,6 @@ class StudentController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('The requested page does not exist.');
+        throw new NotFoundHttpException('Студент не найден.');
     }
 }

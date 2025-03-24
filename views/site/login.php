@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'id' => 'login-form',
                 'fieldConfig' => [
                     'template' => "{label}\n{input}\n{error}",
-                    'labelOptions' => ['class' => 'col-lg-1 col-form-label mr-lg-3'],
+                    'labelOptions' => ['class' => 'col-lg-12 col-form-label mr-lg-3'],
                     'inputOptions' => ['class' => 'col-lg-3 form-control'],
                     'errorOptions' => ['class' => 'col-lg-7 invalid-feedback'],
                 ],
@@ -37,15 +37,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <div class="form-group">
                 <div>
-                    <?= Html::submitButton('войти', ['class' => 'btn my-btn-primary', 'name' => 'login-button']) ?>
+                    <?= Html::submitButton('Войти', ['class' => 'btn my-btn-primary', 'name' => 'login-button']) ?>
                 </div>
             </div>
 
             <?php ActiveForm::end(); ?>
 
             <div style="color:#999;">
-                <!-- or <strong>asd/demo</strong> -->
-                войти можно по <br><strong>admin/admin</strong><br><strong>teacher/teacher</strong><br><strong>student/student</strong>.
+                войти можно по <br><strong>admin/admin</strong>
             </div>
 
         </div>

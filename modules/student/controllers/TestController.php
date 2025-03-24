@@ -48,24 +48,23 @@ class TestController extends Controller
     {
 
         $group_test_id = GroupTest::getGroupTestId();
-        $end_time = GroupTest::findOne(['id' => $group_test_id?->id])->end_time;
+        $end_time = GroupTest::findOne(['id' => $group_test_id?->id])?->end_time;
         $current_time = date('Y-m-d H:i:s');
         $isValidTime = strtotime($end_time) > strtotime($current_time);
-
 
         $session = Yii::$app->session;
         // VarDumper::dump($isValidTime, 10, true);
         // die;
         $current_question = Yii::$app->request->post('question');
         $current_question = empty($current_question) ? 1 : $current_question;
-        $test_id = $group_test_id->test_id;
+        $test_id = $group_test_id?->test_id;
         $attempt = 0;
         $attempt = StudentAnswer::getLastAttempt($group_test_id) + 1;
 
         if (!$isValidTime) {
-            StudentTest::createStudentTest($test_id, $group_test_id, $attempt, Yii::$app->user->identity->id, $isValidTime);
+            if ($test_id) StudentTest::createStudentTest($test_id, $group_test_id, $attempt, Yii::$app->user->identity->id, $isValidTime);
             // Yii::$app->session->setFlash('error', 'время закончилось');
-            return $this->redirect('/');
+            return $this->redirect('/')->send();
         }
 
         $modelStudentAnswer = new StudentAnswer();

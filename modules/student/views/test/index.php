@@ -83,8 +83,8 @@ $this->registerJsFile('js/timerTest.js', ['depends' => YiiAsset::class]);
                     'item' => function ($index, $item, $name, $checked, $value) {
                         $checkedAttribute = $checked ? 'checked' : '';
                         return "<div class='form-check d-flex align-items-center'>
+                        <label for='radio-$index' class='form-check-label' style='font-weight: 400;'>{$item->title}</br>" . ($item->image ? Html::img($item->image, ['style' => 'height:150px']) : '') . "</label>
                         <input id='radio-$index' class='form-check-input' type='radio' name='{$name}' value='{$value}' {$checkedAttribute}>
-                        <label for='radio-$index' class='form-check-label' style='font-weight: 400;'>{$item->title}" . ($item->image ? Html::img($item->image, ['style' => 'height:150px']) : '') . "</label>
                     </div>";
                     }
                 ])->label(false) ?>
@@ -97,7 +97,7 @@ $this->registerJsFile('js/timerTest.js', ['depends' => YiiAsset::class]);
                         $checkedAttribute = $checked ? 'checked' : '';
                         return "<div class='form-check d-flex align-items-center'>
                         <input id='checkbox-$index' class='form-check-input' type='checkbox' name='{$name}' value='{$value}' {$checkedAttribute}>
-                            <label for='checkbox-$index' class='form-check-label' style='font-weight: 400;'>{$item->title}" . ($item->image ? Html::img($item->image, ['style' => 'height:150px']) : '') . "</label>
+                            <label for='checkbox-$index' class='form-check-label' style='font-weight: 400;'>{$item->title}</br>" . ($item->image ? Html::img($item->image, ['style' => 'height:150px']) : '') . "</label>
                         </div>";
                     }
                 ])->label(false); ?>

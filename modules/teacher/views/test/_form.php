@@ -81,7 +81,9 @@ use wbraganca\dynamicform\DynamicFormWidget;
                 ?>
 
                 <div class="row custom-file">
-                    <?= $form->field($modelQuestion, "[{$indexQuestion}]imageFile")->fileInput(['class' => 'form-control custom-file-input w-25'])->label('Изображение', ['class' => ' w-25 custom-file-label']) ?>
+                    <div class="col-12">
+                        <?= $form->field($modelQuestion, "[{$indexQuestion}]imageFile")->fileInput(['class' => 'form-control w-50']) ?>
+                    </div>
                     <div class="col-6">
                         <?= $form->field($modelQuestion, "[{$indexQuestion}]text")->textarea(['maxlength' => true, 'class' => 'form-control']) ?>
                     </div>
@@ -96,12 +98,12 @@ use wbraganca\dynamicform\DynamicFormWidget;
                 ?>
 
                 <?php if (Yii::$app->controller->action->id == 'create') : ?>
-                    <button type="button" class="remove-question my-btn-primary">Удалить вопрос</button>
+                    <button type="button" class="remove-question btn btn-outline-danger">Удалить вопрос</button>
                 <?php endif; ?>
             </div>
         <?php endforeach; ?>
     </row>
-    <div class="row mb-4">
+    <div class="my-4">
         <?php if (Yii::$app->controller->action->id == 'create') : ?>
             <div style="width: auto;">
                 <button type="button" class="add-question btn btn-outline-success">Добавить вопрос</button>

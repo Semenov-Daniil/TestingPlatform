@@ -63,6 +63,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => Html::encode($model->login),
             ],
             [
+                'attribute' => 'password',
+                'value' => Html::encode($model->userPassword->password),
+            ],
+            [
                 'attribute' => 'email',
                 'filter' => false,
                 'visible' => (bool) $model->email,
@@ -75,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => Html::encode($model->phone),
             ],
             [
-                'label' => 'группа',
+                'label' => 'Группа',
                 'format' => 'html',
                 'value' => $userGroupArr
                     ? $grupBtn($userGroupArr, $model)

@@ -80,9 +80,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => fn ($model) => $model->name,
             ],
             [
+                'attribute' => 'patronimyc',
+                'enableSorting' => false,
+                'value' => fn ($model) => $model->patronimyc,
+            ],
+            [
                 'attribute' => 'login',
                 'enableSorting' => false,
                 'filter' => false,
+            ],
+            [
+                'attribute' => 'password',
+                'enableSorting' => false,
+                'filter' => false,
+                'value' => fn ($model) => $model->userPassword->password,
             ],
             [
                 'label' => 'группа',
@@ -97,9 +108,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => fn ($model) => getAvarageMark($model->id, $arrOfMarks),
             ],
             [
-                'label' => '',
-                'format' => 'html',
-                'value' => fn ($model) => Html::a('просмотр', ['view', 'id' => $model->id], ['class' => 'btn my-btn-primary']),
+                'class' => ActionColumn::class,
+                'template' => '
+                    <div class="d-flex flex-wrap gap-2 justify-content-end">
+                        {view}
+                        {delete}
+                    </div>
+                ',
+                'buttons' => [
+                    'delete' => function ($url, $model, $key) {
+                        return Html::a('Удалить', ['delete', 'id' => $model->id], ['class' => 'btn my-btn-danger', 'data' => ['method' => 'post']]);
+                    },
+                    'view' => function ($url, $model, $key) {
+                        return Html::a('Просмотр', ['view', 'id' => $model->id], ['class' => 'btn my-btn-primary']);
+                    },
+                ],
+                'visible' => $dataProvider->totalCount
             ],
         ],
     ]); ?>

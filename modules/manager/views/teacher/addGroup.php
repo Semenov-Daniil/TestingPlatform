@@ -4,11 +4,16 @@ use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var app\models\User $model */
+/** @var app\models\UserGroup $model */
+/** @var app\models\User $user */
 /** @var yii\widgets\ActiveForm $form */
+
+$this->title = 'Добавление группы преподователю: ' . $user->surname;
 ?>
 
 <div class="user-form">
+
+    <h3><?= Html::encode($this->title); ?></h3>
 
     <?php $form = ActiveForm::begin(); ?>
 

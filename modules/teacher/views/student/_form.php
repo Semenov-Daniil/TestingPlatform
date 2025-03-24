@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'patronimyc')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'group_id')->dropDownList($groupArr, ['prompt' => 'выберите группу']) ?>
+    <?= $form->field($model, 'group_id')->dropDownList($groupArr, ['prompt' => 'Выберите группу']) ?>
 
     <? # $form->field($model, 'email')->textInput(['maxlength' => true])
     ?>

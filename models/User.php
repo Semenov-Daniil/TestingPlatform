@@ -89,16 +89,20 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'login' => 'Логин',
             'role_id' => 'Роль',
             'fileInput' => 'Список студентов',
-            'group_id' => 'группа',
+            'group_id' => 'Группа',
             'auth_key' => 'Auth Key',
         ];
     }
 
     /**
-     * Gets query for [[Group]].
+     * Gets query for [[UserPassword]].
      *
      * @return \yii\db\ActiveQuery
      */
+    public function getUserPassword()
+    {
+        return $this->hasOne(UserPassword::class, ['user_id' => 'id']);
+    }
 
     /**
      * Gets query for [[Role]].

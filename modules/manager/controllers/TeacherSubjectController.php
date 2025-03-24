@@ -106,6 +106,8 @@ class TeacherSubjectController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'users' => User::getAllTeacher(),
+            'subjects'=>Subject::getAllSubject(),
         ]);
     }
 

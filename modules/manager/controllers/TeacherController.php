@@ -6,6 +6,7 @@ use app\models\Group;
 use app\models\Role;
 use app\models\User;
 use app\models\UserGroup;
+use app\models\UserPassword;
 use app\modules\manager\models\TeacherSearch;
 use Yii;
 use yii\web\Controller;
@@ -146,7 +147,12 @@ class TeacherController extends Controller
                     $model->auth_key = Yii::$app->security->generateRandomString();
                     $model->role_id = Role::getRoleId('teacher');
                     if ($model->save()) {
-                        return $this->redirect(['view', 'id' => $model->id, 'login' => $model->login, 'pass' => $tempPass]);
+                        $password = new UserPassword();
+                        $password->user_id = $model->id;
+                        $password->password = $tempPass;
+                        if ($password->save()) {
+                            return $this->redirect(['view', 'id' => $model->id]);
+                        }
                     }
                 }
             }
@@ -172,12 +178,13 @@ class TeacherController extends Controller
             if (!$model->save())
                 return;
 
-            return $this->redirect(['view', 'id' => $model->user_id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('addGroup', [
             'model' => $model,
             'groupTitle' => Group::getAllGroupTitle(),
+            'user' => User::findOne(['id' => $user_id]),
         ]);
     }
     public function actionEditingGroup($id, $user_id)

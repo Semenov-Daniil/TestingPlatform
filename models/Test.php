@@ -71,6 +71,18 @@ class Test extends \yii\db\ActiveRecord
         return $this->hasMany(Question::class, ['test_id' => 'id']);
     }
 
+    public function getLastGroup()
+    {
+        return GroupTest::find()
+            ->where(['test_id' => $this->id])
+            ->orderBy([
+                'id' => SORT_DESC,
+            ])
+            ->limit(1)
+            ->one()
+        ;
+    }
+
     /**
      * Gets query for [[StudentTests]].
      *

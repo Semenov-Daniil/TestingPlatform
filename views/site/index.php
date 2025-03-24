@@ -4,7 +4,7 @@
 
 use yii\bootstrap5\Html;
 
-$this->title = 'My Yii Application';
+$this->title = Yii::$app->name;
 if (!Yii::$app->user->isGuest) {
     # code...
     if (Yii::$app->user->identity->role_id == 4) {

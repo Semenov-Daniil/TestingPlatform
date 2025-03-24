@@ -39,39 +39,37 @@ use wbraganca\dynamicform\DynamicFormWidget;
 <div class="row d-flex justify-content-between">
 
     <h4 class="col-8">Ответы</h4>
-    <div class="col-2">
-        <button type="button" class="mb-3 p-1 add-answer btn my-btn-success btn-xs; border-radius: 100%;"><i class="fi fi-rr-plus" style="height: 20px; width: 20px; display:block"></i></button>
+    <div class="col-auto">
+        <button type="button" class="px-3 py-2 add-answer btn my-btn-success btn-xs d-flex gap-2 align-items-center"><i class="fi fi-rr-plus"></i> Добавить ответ</button>
     </div>
 </div>
-<div class="container-answers">
+<div class="row container-answers">
     <?php foreach ($modelsAnswer as $indexAnswer => $modelAnswer) : ?>
-        <row class="answer-item">
+        <div class="col-12 answer-item">
             <?php
             if (!$modelAnswer->isNewRecord) {
                 echo Html::activeHiddenInput($modelAnswer, "[{$indexQuestion}][{$indexAnswer}]id");
             }
             ?>
-            <div class="col-3">
-                <?= $form->field($modelAnswer, "[{$indexQuestion}][{$indexAnswer}]imageFile")->fileInput(['class' => 'form-control custom-file-input'])->label('Изображение', ['class' => 'custom-file-label']) ?>
+            <div class="col-6">
+                <?= $form->field($modelAnswer, "[{$indexQuestion}][{$indexAnswer}]imageFile")->fileInput(['class' => 'form-control']) ?>
             </div>
 
-            <div class="row d-flex justify-content-between align-items-center">
+            <div class="row col-12">
 
-                <div class="col-1 d-flex justify-content-around">
-                    <?= $form->field($modelAnswer, "[{$indexQuestion}][{$indexAnswer}]is_true")->label("правильный ответ", ['class' => "form-check-label w-100", 'style' => 'color:black'])->checkbox(['class' => "form-check-input"]) ?>
+                <div class="col-auto d-flex justify-content-around">
+                    <?= $form->field($modelAnswer, "[{$indexQuestion}][{$indexAnswer}]is_true")->label("Правильный ответ", ['class' => "form-check-label w-100", 'style' => 'color:black'])->checkbox(['class' => "form-check-input"]) ?>
                 </div>
 
-                <div class="col-7">
-                    <?= $form->field($modelAnswer, "[{$indexQuestion}][{$indexAnswer}]title")->label(false)->textInput(['maxlength' => true, 'class' => 'answer-input-text form-control']) ?>
+                <div class="col-12">
+                    <?= $form->field($modelAnswer, "[{$indexQuestion}][{$indexAnswer}]title")->label(false)->textInput(['maxlength' => true, 'class' => 'form-control']) ?>
                 </div>
-
-                <div class="col-2">
-                    <button type="button" class="mb-3 p-1 remove-answer btn my-btn-danger btn-xs; border-radius: 100%;"><i class="fi fi-rr-cross" style="height: 20px; width: 20px; display:block"></i></button>
-                </div>
-
+                
             </div>
-        </row>
-
+            <div class="col-12 d-flex justify-content-end">
+                <button type="button" class="px-3 py-2 remove-answer btn my-btn-danger btn-xs d-flex gap-2 align-items-center"><i class="fi fi-rr-cross"></i> Удалить ответ</button>
+            </div>
+        </div>
     <?php endforeach; ?>
 
 </div>

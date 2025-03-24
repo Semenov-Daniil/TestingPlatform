@@ -45,8 +45,8 @@ class UserGroup extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
-            'group_id' => 'Group ID',
+            'user_id' => 'Пользователь',
+            'group_id' => 'Группа',
         ];
     }
 

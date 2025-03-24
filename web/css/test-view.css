@@ -144,9 +144,6 @@
 .dynamicform_inner {
   margin-top: 2rem;
 }
-.form-check-label {
-  width: 100px !important;
-}
 .answer-input-text {
   margin: 0 3rem;
 }
@@ -173,4 +170,8 @@
 .dropdown-menu {
   overflow: auto;
   max-height: 20rem;
+}
+
+.gap-2 {
+  gap: 1rem;
 }

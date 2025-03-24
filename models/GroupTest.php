@@ -73,6 +73,11 @@ class GroupTest extends \yii\db\ActiveRecord
         return $this->hasMany(Deny::class, ['group_test_id' => 'id']);
     }
 
+    public function getGroup()
+    {
+        return $this->hasMany(Group::class, ['id' => 'group_id']);
+    }
+
     /**
      * Gets query for [[StudentTests]].
      *
