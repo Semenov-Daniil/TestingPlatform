@@ -14,7 +14,7 @@ use yii\widgets\Pjax;
 /** @var app\modules\teacher\models\StudentTestSeach $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'проверка тестов';
+$this->title = 'Проверка тестов';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="student-test-index">

@@ -86,9 +86,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 array_push(
                     $list,
                     "<li class='list-group-item list-test-item-correct d-flex justify-content-between'>" .
-                        StudentAnswer::findOne(['user_id' => $user_id, 'attempt' => $studentTest->attempt, 'answer_id' => $answer_id])->answer_title
-                        ? StudentAnswer::findOne(['user_id' => $user_id, 'attempt' => $studentTest->attempt, 'answer_id' => $answer_id])
-                        : $answer->title . "<div>" .
+                        (StudentAnswer::findOne(['user_id' => $user_id, 'attempt' => $studentTest->attempt, 'answer_id' => $answer->id])->answer_title
+                        ? StudentAnswer::findOne(['user_id' => $user_id, 'attempt' => $studentTest->attempt, 'answer_id' => $answer->id])->answer_title
+                        : $answer->title) . "<div>" .
                         Html::a('Одобрить', [
                             './test/accept',
                             'test_id' => $model->id,

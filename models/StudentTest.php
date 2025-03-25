@@ -57,14 +57,14 @@ class StudentTest extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'points' => 'баллы',
-            'mark' => 'оценка',
-            'test_id' => 'Test ID',
-            'user_id' => 'студент',
+            'points' => 'Баллы',
+            'mark' => 'Оценка',
+            'test_id' => 'Тест ID',
+            'user_id' => 'Студент',
             'group_test_id' => 'Group Test ID',
-            'cheked' => 'проверено',
-            'date' => 'Date',
-            'attempt' => 'попытка',
+            'cheked' => 'Проверено',
+            'date' => 'Дата',
+            'attempt' => 'Попытка',
             'ip' => 'Ip',
         ];
     }

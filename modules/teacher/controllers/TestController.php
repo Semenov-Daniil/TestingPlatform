@@ -93,6 +93,7 @@ class TestController extends Controller
             'model' => $this->findModel($id),
             'questions' => $questions,
             'student_test_id' => $student_test_id,
+            'studentTest' => StudentTest::findOne(['id' => $student_test_id]),
             'user_id' => $user_id,
         ]);
     }

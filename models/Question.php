@@ -57,12 +57,12 @@ class Question extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'text' => 'Текст',
-            'points_per_question' => 'Points Per Question',
-            'image' => 'Image',
+            'points_per_question' => 'Баллы за вопрос',
+            'image' => 'Изображение',
             'imageFile' => 'Изображение',
             'level_id' => 'Сложность вопроса',
-            'test_id' => 'Test ID',
-            'type_id' => 'тип вопроса',
+            'test_id' => 'Тест',
+            'type_id' => 'Тип вопроса',
         ];
     }
 

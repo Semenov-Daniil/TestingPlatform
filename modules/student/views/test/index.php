@@ -74,7 +74,9 @@ $this->registerJsFile('js/timerTest.js', ['depends' => YiiAsset::class]);
         <?= $form->field($modelStudentAnswer, 'question_id')->hiddenInput(['value' => $question->id])->label(false) ?>
         <?= $form->field($modelStudentAnswer, 'attempt')->hiddenInput(['value' => $attempt])->label(false) ?>
         <?php if ($question->image) : ?>
-            <img src="<?= $question->image ?>" style='height:150px' />
+            <div class="ratio ratio-16x9  d-block">
+                <img src="<?= $question->image ?>" class="img-fluid  mx-auto" />
+            </div>
         <?php endif ?>
         <?php if ($question->type_id == QuestionType::getTypeId('Один правильный ответ')) : ?>
             <div class="answers-test">

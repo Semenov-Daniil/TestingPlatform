@@ -12,7 +12,7 @@ use yii\widgets\DetailView;
 /** @var app\models\Test $model */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Tests', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Тест', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 $studentTest = StudentTest::findOne(['id' => $student_test_id])
@@ -25,11 +25,11 @@ $studentTest = StudentTest::findOne(['id' => $student_test_id])
         'model' => $model,
         'attributes' => [
             [
-                'label' => 'оценка',
+                'label' => 'Оценка',
                 'value' => $studentTest->mark
             ],
             [
-                'label' => 'воличество баллов',
+                'label' => 'Количество баллов',
                 'value' => $studentTest->points
             ],
             [
@@ -90,6 +90,7 @@ $studentTest = StudentTest::findOne(['id' => $student_test_id])
     foreach ($list as $item) {
         echo $item;
     }
+    // VarDumper::dump($list, 10, true);die;
     ?>
 
 </div>

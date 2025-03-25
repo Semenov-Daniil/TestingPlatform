@@ -55,9 +55,9 @@ class Test extends \yii\db\ActiveRecord
             'question_count' => 'Количество вопросов',
             'point_count' => 'Количество баллов',
             'subject_id' => 'Предмет',
-            'is_active' => 'Is Active',
-            'group_id' => 'группа',
-            'duration' => 'длительность теста',
+            'is_active' => 'Активный',
+            'group_id' => 'Группа',
+            'duration' => 'Длительность теста',
         ];
     }
 

@@ -13,7 +13,7 @@ use yii\bootstrap5\Html;
 /** @var app\modules\student\models\StudentTestSeach $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'мои оценки';
+$this->title = 'Мои оценки';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="student-test-index">
